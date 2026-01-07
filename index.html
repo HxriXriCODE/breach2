@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Breached Alert</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(45deg, #000, #1a0000, #330000);
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Animated background particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff0040;
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+        
+        /* Glitch effect */
+        .glitch {
+            animation: glitch 1s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        /* Main container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            padding: 0 16px;
+        }
+        
+        .alert-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ff0040;
+            text-shadow: 0 0 20px #ff0040, 0 0 40px #ff0040;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .breach-info {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        /* Password section */
+        .passwords {
+            background: rgba(255, 0, 64, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid #ff0040;
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 0 50px rgba(255, 0, 64, 0.5);
+        }
+        
+        .password-item {
+            font-size: 1.3rem;
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.5);
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            word-break: break-all;
+            transition: all 0.3s;
+        }
+        
+        .password-item:hover {
+            background: rgba(255, 0, 64, 0.2);
+            transform: scale(1.02);
+        }
+        
+        .generate-btn {
+            background: linear-gradient(45deg, #ff0040, #ff4080);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(255, 0, 64, 0.4);
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 0, 64, 0.6);
+        }
+        
+        /* Social buttons container */
+        .social-buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-instagram {
+            background: linear-gradient(45deg, #ff6a00, #ee0979);
+        }
+        
+        .social-linkedin {
+            background: linear-gradient(45deg, #0072b1, #00a0dc);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .alert-title { font-size: 2.5rem; }
+            .breach-info { font-size: 1.2rem; }
+            .passwords { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <h1 class="alert-title glitch">⚠️ DATA BREACHED ⚠️</h1>
+        <p class="breach-info glitch">Your account has been compromised. Change your password immediately!</p>
+        
+        <div class="passwords">
+            <h3 style="color: #ff0040; margin-bottom: 20px;">Recommended Strong Passwords:</h3>
+            <div id="pass1" class="password-item">Generate new passwords...</div>
+            <div id="pass2" class="password-item">Generate new passwords...</div>
+            <div id="pass3" class="password-item">Generate new passwords...</div>
+            
+            <button class="generate-btn" onclick="generatePasswords()">New Passwords</button>
+
+            <!-- Social login buttons -->
+            <div class="social-buttons">
+                <a href="https://www.instagram.com" target="_blank" style="text-decoration:none;">
+                    <button class="generate-btn social-instagram">
+                        Go to Instagram
+                    </button>
+                </a>
+
+                <a href="https://www.linkedin.com/login" target="_blank" style="text-decoration:none;">
+                    <button class="generate-btn social-linkedin">
+                        Go to LinkedIn
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Secure random password generator
+        function generatePassword(length = 16) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+            let password = '';
+            const array = new Uint32Array(length);
+            crypto.getRandomValues(array); // cryptographically strong randomness [web:14][web:18]
+            for (let i = 0; i < length; i++) {
+                password += chars[array[i] % chars.length];
+            }
+            return password;
+        }
+        
+        function generatePasswords() {
+            document.getElementById('pass1').textContent = generatePassword();
+            document.getElementById('pass2').textContent = generatePassword();
+            document.getElementById('pass3').textContent = generatePassword();
+        }
+        
+        // Auto-generate on load
+        generatePasswords();
+        
+        // Create floating particles
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particles.appendChild(particle);
+            }
+        }
+        createParticles();
+        
+        // Glitch toggle for drama
+        setInterval(() => {
+            document.querySelectorAll('.glitch').forEach(el => {
+                el.classList.toggle('glitch');
+            });
+        }, 2000);
+    </script>
+</body>
+</html>
